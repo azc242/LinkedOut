@@ -9,6 +9,7 @@ Http.send();
 Http.onreadystatechange = (e) => {
   console.log("printed");
   console.log(Http.response[0].url);
+
 };
 
 var elements = document.getElementsByClassName("core-rail");
