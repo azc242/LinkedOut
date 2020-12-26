@@ -1,13 +1,18 @@
 // jshint esversion:6
 
+document.getElementById("global-nav").querySelector("a[href='/feed/']").addEventListener('click', handleClick, true);
+function handleClick() {
+  console.log("loiaded");
+  window.location.href = 'https://www.linkedin.com/feed';
+}
+
 var elements = document.getElementsByClassName("core-rail");
-http://thecatapi.com/api/images/get?format=src&type=gif
 for (var i = 0; i < elements.length; i++) {
   elements.item(i).innerHTML = '';
 }
 
 const Http = new XMLHttpRequest();
-const url='https://api.thecatapi.com/v1/images/search';
+const url = 'https://api.thecatapi.com/v1/images/search';
 Http.open("GET", url);
 Http.responseType = "json";
 Http.send();
@@ -19,7 +24,7 @@ Http.onreadystatechange = (err) => {
 
   const imageHeader = "<div id=\"ember179\" class=\"feed-shared-update-v2__content feed-shared-image feed-shared-image--single-image ember-view\"> <div class=\"relative\"> <div class=\"feed-shared-image__container\" style=\"padding-top: 66.72%;\"> <button class=\"feed-shared-image__image-link\" data-control-name=\"update_image\" data-control-id=\"fh7na5ISgyrRUHpZdhi5+w==\" aria-describedby=\"feed-shared-image-ember179\" type=\"button\"> <div id=\"ember180\" class=\"ivm-image-view-model ember-view\"> <div id=\"ember181\" class=\"display-flex ivm-view-attr__img-wrapper ivm-view-attr__img-wrapper--use-img-tag ember-view\">";
   const imageHeader2 = "</div></div></button></div></div></div>";
-  
+
   const img = '<img  width="600" src="' + Http.response[0].url + '" loading="lazy" height="400" id="ember182" class="ivm-view-attr__img--centered feed-shared-image__image feed-shared-image__image--constrained lazy-image ember-view"';
 
   document.getElementsByClassName("core-rail").item(0).innerHTML = header1 + imageHeader + img + imageHeader2 + header2;
