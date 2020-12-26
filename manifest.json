@@ -13,7 +13,7 @@
 		}
 	],
 	"icons": {
-		"128": "linkedin128.png"
+		"128": "images/linkedin128.png"
 	},
 	"background": {
 		"persistent": false,
