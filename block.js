@@ -4,7 +4,7 @@
 // const DEL_SELECTOR = ".core-rail";
 // const mo = new MutationObserver(onMutation);
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     // listen for messages sent from background.js
     if (request.action === 'block_feed') {
       observe(function() {
@@ -15,7 +15,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       insertImage();
       return true;
     } else {
-      mo.disconnect();
       return true;
     }
 });
@@ -25,8 +24,8 @@ console.log("block.js runs");
 const DEL_SELECTOR = ".core-rail";
 const mo = new MutationObserver(onMutation);
 // in case the content script was injected after the page is partially loaded
-onMutation([{addedNodes: [document.documentElement]}], true);
-observe();
+// onMutation([{addedNodes: [document.documentElement]}], true);
+// observe();
 
 function onMutation(mutations, hideElements) {
   console.log("mutation runs");
@@ -52,7 +51,6 @@ function onMutation(mutations, hideElements) {
     mo.disconnect();
     for (const el of toRemove) {
       try {
-        // el.setAttribute('display', 'none');
         el.remove();
       } catch (e) {
         console.log(e);
