@@ -1,12 +1,25 @@
 // jshint esversion:6
 
-const DEL_SELECTOR = ".core-rail";
+// const DEL_SELECTOR = ".core-rail";
+// const mo = new MutationObserver(onMutation);
 
+// chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+//     // listen for messages sent from background.js
+//     if (request.action === 'block_feed') {
+//       const removed = onMutation([{addedNodes: [document.documentElement]}]);
+//       console.log(removed);
+//       observe();
+//       insertImage();
+//     } else {
+//       location.reload();
+//     }
+//     return true;
+// });
+
+const DEL_SELECTOR = ".core-rail";
 const mo = new MutationObserver(onMutation);
 // in case the content script was injected after the page is partially loaded
-onMutation([{
-  addedNodes: [document.documentElement]
-}]);
+onMutation([{addedNodes: [document.documentElement]}]);
 observe();
 
 function onMutation(mutations) {
@@ -18,16 +31,13 @@ function onMutation(mutations) {
     for (const n of addedNodes) {
       if (n.tagName) {
         if (n.matches(DEL_SELECTOR)) {
-          // console.log("matches 1");
           toRemove.push(n.childNodes);
         } else if (n.firstElementChild && n.querySelector(DEL_SELECTOR)) {
-          // console.log("matches 2");
           var matches = n.querySelectorAll(DEL_SELECTOR);
 
           for (var i = 0; i < matches.length; i++) {
             toRemove.push(...matches[i].childNodes);
           }
-          // toRemove.push(...n.querySelectorAll(DEL_SELECTOR).childNodes);
         }
       }
     }
@@ -38,7 +48,7 @@ function onMutation(mutations) {
       try {
         el.remove();
       } catch (e) {
-        // do nothing
+        console.log(e);
       }
     }
     observe();
@@ -60,6 +70,10 @@ Http.open("GET", url);
 Http.responseType = "json";
 Http.send();
 
+window.onload = function() {
+  console.log("inserting image");
+  insertImage();
+};
 
 function insertImage() {
   console.log("loaded");

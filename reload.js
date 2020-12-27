@@ -3,26 +3,63 @@
 console.log("reload");
 
 window.onload = function(e) {
-  var nav = document.getElementById('global-nav');
-  console.log(nav);
-  document.getElementById("global-nav").querySelector("a[href='/feed/']").setAttribute("style", "pointer-events:none;");
+  try {
+    var nav = document.getElementById('global-nav');
+    console.log(nav);
+    document.getElementById("global-nav").querySelector("a[href='/feed/']").setAttribute("style", "pointer-events:none;");
 
-  var homeButton = document.getElementsByClassName("global-nav__primary-items")[0];
-  console.log(homeButton);
-  homeButton = homeButton.getElementsByClassName("global-nav__primary-item")[0];
-  console.log(homeButton);
-  var homeButtonHtml = homeButton.innerHTML;
-  const newHomeButton = document.createElement('a');
-  newHomeButton.setAttribute("href", "https://www.linkedin.com/feed");
+    var navBar = document.getElementsByClassName("global-nav__primary-items")[0];
+    var homeButton = navBar.getElementsByClassName("global-nav__primary-item")[0];
+    var networkButton = navBar.getElementsByClassName("global-nav__primary-item")[1];
+    var jobButton = navBar.getElementsByClassName("global-nav__primary-item")[2];
+    var messagesButton = navBar.getElementsByClassName("global-nav__primary-item")[3];
+    var notificationButton = navBar.getElementsByClassName("global-nav__primary-item")[4];
 
-  newHomeButton.setAttribute("class", "global-nav__primary-item");
-  newHomeButton.innerHTML = "";
-  newHomeButton.innerHTML = homeButton.outerHTML;
+    var homeButtonHtml = homeButton.innerHTML;
+    const newHomeButton = document.createElement('a');
+    newHomeButton.setAttribute("href", "https://www.linkedin.com/feed");
+    newHomeButton.setAttribute("class", "global-nav__primary-item");
+    newHomeButton.innerHTML = "";
+    newHomeButton.innerHTML = homeButton.outerHTML;
+    homeButton.parentNode.replaceChild(newHomeButton, homeButton);
+    // console.log("changed home button link");
 
-  homeButton.parentNode.replaceChild(newHomeButton, homeButton);
-  console.log("changed home button link");
+    var networkButtonHtml = networkButton.innerHTML;
+    const newNetworkButton = document.createElement('a');
+    newNetworkButton.setAttribute("href", "https://www.linkedin.com/mynetwork");
+    newNetworkButton.setAttribute("class", "global-nav__primary-item");
+    newNetworkButton.innerHTML = "";
+    newNetworkButton.innerHTML = networkButton.outerHTML;
+    networkButton.parentNode.replaceChild(newNetworkButton, networkButton);
 
-  insertImage();
+    var jobButtonHtml = jobButton.innerHTML;
+    const newJobButton = document.createElement('a');
+    newJobButton.setAttribute("href", "https://www.linkedin.com/jobs");
+    newJobButton.setAttribute("class", "global-nav__primary-item");
+    newJobButton.innerHTML = "";
+    newJobButton.innerHTML = jobButton.outerHTML;
+    jobButton.parentNode.replaceChild(newJobButton, jobButton);
+
+    var messagesButtonHtml = messagesButton.innerHTML;
+    const newMessagesButton = document.createElement('a');
+    newMessagesButton.setAttribute("href", "https://www.linkedin.com/messaging");
+    newMessagesButton.setAttribute("class", "global-nav__primary-item");
+    newMessagesButton.innerHTML = "";
+    newMessagesButton.innerHTML = messagesButton.outerHTML;
+    messagesButton.parentNode.replaceChild(newMessagesButton, messagesButton);
+
+    var notificationsButtonHtml = notificationButton.innerHTML;
+    const newNotificationsButton = document.createElement('a');
+    newNotificationsButton.setAttribute("href", "https://www.linkedin.com/notifications");
+    newNotificationsButton.setAttribute("class", "global-nav__primary-item");
+    newNotificationsButton.innerHTML = "";
+    newNotificationsButton.innerHTML = notificationButton.outerHTML;
+    notificationButton.parentNode.replaceChild(newNotificationsButton, notificationButton);
+
+    insertImage();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 function insertImage() {
@@ -45,3 +82,13 @@ function insertImage() {
     console.log(e);
   }
 }
+
+
+// chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+//     // listen for messages sent from background.js
+//     if (request.action === 'block_feed') {
+//       // alert(request.url); // new url is now in content scripts!
+//       console.log("wrong page lol");
+//     }
+//     return true;
+// });
