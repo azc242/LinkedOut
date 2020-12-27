@@ -1,24 +1,24 @@
 {
-	"name": "LinkedOut",
-	"version": "1.0",
-	"manifest_version": 2,
-	"content_scripts": [
+  "name": "LinkedOut",
+  "version": "1.0",
+  "manifest_version": 2,
+  "content_scripts": [
 		{
-			"matches": ["https://www.linkedin.com/*"],
-			"run_at": "document_start",
-			"js": ["block.js"]
-		}
+    "matches": ["https://www.linkedin.com/*"],
+    "run_at": "document_start",
+    "js": ["block.js"]
+	  }
 	],
-	"background": {
-	"scripts": ["background.js"],
-	"persistent": false
-	},
-	"icons": {
-		"128": "images/linkedin128.png"
-	},
-	"permissions": [
-		"activeTab",
-		"tabs",
-		"background"
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "128": "images/linkedin128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background"
   ]
 }

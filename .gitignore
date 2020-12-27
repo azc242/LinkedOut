@@ -1,6 +1,7 @@
 # js files for testing functionality
 header.js
 test.js
+reload.js
 
 # for formatting code injected into DOM
 format.html
