@@ -1,5 +1,7 @@
 // jshint esversion:6
 
+console.log("reload");
+
 window.onload = function(e) {
   var nav = document.getElementById('global-nav');
   console.log(nav);
@@ -42,54 +44,4 @@ function insertImage() {
   } catch (e) {
     console.log(e);
   }
-  // };
 }
-
-
-
-
-
-
-
-
-// var nav = document.getElementById('global-nav');
-// console.log(nav);
-// document.getElementById("global-nav").querySelector("a[href='/feed/']").setAttribute("style", "pointer-events:none;");
-//
-// var homeButton = document.getElementsByClassName("global-nav__primary-items")[0];
-// console.log(homeButton);
-// homeButton = homeButton.getElementsByClassName("global-nav__primary-item")[0];
-// console.log(homeButton);
-// var homeButtonHtml = homeButton.innerHTML;
-// const newHomeButton = document.createElement('a');
-// newHomeButton.setAttribute("href", "https://www.linkedin.com/feed");
-//
-// newHomeButton.setAttribute("class", "global-nav__primary-item");
-// newHomeButton.innerHTML = "";
-// newHomeButton.innerHTML = homeButton.outerHTML;
-//
-// homeButton.parentNode.replaceChild(newHomeButton, homeButton);
-// console.log("changed home button link");
-
-
-// // document.getElementById("global-nav").querySelector("a[href='/feed/']").setAttribute("href", "https://www.google.com/");
-//
-// document.getElementById("global-nav").querySelector("a[href='/feed/']").addEventListener('click', handleClick, true);
-// function handleClick(event) {
-//   event.preventDefault();
-//   console.log(document.getElementById("global-nav").querySelector("a[href='/feed/']"));
-//   // document.getElementById("global-nav").querySelector("a[href='/feed/']").href = "www.google.com";
-//   console.log("loaded");
-//   window.location.href = 'https://www.linkedin.com/feed';
-//   return false;
-// }
-
-
-
-
-//
-// document.getElementById("global-nav").querySelector("a[href='/feed/']").addEventListener('click', handleClick, true);
-// function handleClick() {
-//   console.log("loaded");
-//   window.location.href = 'https://www.linkedin.com/feed';
-// }
