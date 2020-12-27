@@ -4,14 +4,14 @@
 	"manifest_version": 2,
 	"content_scripts": [
 		{
+			"matches": ["https://www.linkedin.com/*", "https://www.linkedin.com/"],
+			"js": ["reload.js"]
+		},
+		{
 			"matches": ["https://www.linkedin.com/feed*", "https://www.linkedin.com/feed/"],
 			"run_at": "document_start",
 			"all_frames": true,
 			"js": ["block.js"]
-		},
-		{
-			"matches": ["https://www.linkedin.com/*", "https://www.linkedin.com/"],
-			"js": ["reload.js"]
 		}
 	],
 	"icons": {
