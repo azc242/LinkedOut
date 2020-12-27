@@ -1,29 +1,35 @@
 // jshint esversion:6
 
+// TRY TO MAKE EVERYTHING INSIDE THE CORE-RAIL HIDDEN
 // const DEL_SELECTOR = ".core-rail";
 // const mo = new MutationObserver(onMutation);
 
-// chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-//     // listen for messages sent from background.js
-//     if (request.action === 'block_feed') {
-//       const removed = onMutation([{addedNodes: [document.documentElement]}]);
-//       console.log(removed);
-//       observe();
-//       insertImage();
-//     } else {
-//       location.reload();
-//     }
-//     return true;
-// });
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    // listen for messages sent from background.js
+    if (request.action === 'block_feed') {
+      observe(function() {
+        console.log("Observing started");
+      });
+      onMutation([{addedNodes: [document.documentElement]}], true);
+      mo.disconnect();
+      insertImage();
+      return true;
+    } else {
+      mo.disconnect();
+      return true;
+    }
+});
+
+console.log("block.js runs");
 
 const DEL_SELECTOR = ".core-rail";
 const mo = new MutationObserver(onMutation);
 // in case the content script was injected after the page is partially loaded
-onMutation([{addedNodes: [document.documentElement]}]);
+onMutation([{addedNodes: [document.documentElement]}], true);
 observe();
 
-function onMutation(mutations) {
-  // console.log("script test runs");
+function onMutation(mutations, hideElements) {
+  console.log("mutation runs");
   const toRemove = [];
   for (const {
       addedNodes
@@ -31,12 +37,12 @@ function onMutation(mutations) {
     for (const n of addedNodes) {
       if (n.tagName) {
         if (n.matches(DEL_SELECTOR)) {
-          toRemove.push(n.childNodes);
+          toRemove.push(n.children);
         } else if (n.firstElementChild && n.querySelector(DEL_SELECTOR)) {
           var matches = n.querySelectorAll(DEL_SELECTOR);
 
           for (var i = 0; i < matches.length; i++) {
-            toRemove.push(...matches[i].childNodes);
+            toRemove.push(...matches[i].children);
           }
         }
       }
@@ -46,12 +52,13 @@ function onMutation(mutations) {
     mo.disconnect();
     for (const el of toRemove) {
       try {
+        // el.setAttribute('display', 'none');
         el.remove();
       } catch (e) {
         console.log(e);
       }
     }
-    observe();
+    // observe();
   }
 }
 
@@ -62,8 +69,6 @@ function observe() {
   });
 }
 
-
-
 const Http = new XMLHttpRequest();
 const url = 'https://api.thecatapi.com/v1/images/search';
 Http.open("GET", url);
@@ -72,7 +77,7 @@ Http.send();
 
 window.onload = function() {
   console.log("inserting image");
-  insertImage();
+  // insertImage();
 };
 
 function insertImage() {
