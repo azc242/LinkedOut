@@ -1,6 +1,10 @@
-<div style="text-align:center;"><img align="center" src="https://i.imgur.com/7rHvy0H.png"/></div>
+<h1 align="center">
+  <a href=""><img src="https://i.imgur.com/7rHvy0H.png" alt="LeetHub - Automatically sync your code to GitHub." width="400"></a>
+  <br>
+  LinkedOut - Block your toxic LinkedIn feed.
+  <br>
+</h1>
 
-# LinkedOut - Block your toxic LinkedIn feed.
 ## What is LinkedOut?
 A chrome extension that will remove your LinkedIn feed's posts (and replace it with cat pictures instead).
 
@@ -10,4 +14,3 @@ This extension was inspired by surplus of job hunters who go on LinkedIn to find
 Consequently, this extension was built to better the mental health and well-being of LinkedIn users.
 ## Here's what your LinkedIn feed will look like
 ![Super cute cat LinkedIn feed](https://i.imgur.com/o4gEEed.png)
-# <ins> **Don't be linked in to your toxic feed, get LinkedOut.**</ins>
