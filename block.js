@@ -5,16 +5,16 @@ const DEL_SELECTOR = ".core-rail";
 const mo = new MutationObserver(onMutation);
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    // listen for messages sent from background.js
-    observe(); // start MutationObserver to listen for changes
-    onMutation([{addedNodes: [document.documentElement]}]);
-    mo.disconnect(); // disconnects MO to avoid blocking in other webpages
-    chrome.storage.sync.get(["favoriteAnimal"], function(result) {
-      var showDog = result.favoriteAnimal === "dog";
-      createPost(showDog);
-    });
-    sendResponse({status: 200});
-    return true;
+  // listen for messages sent from background.js
+  observe(); // start MutationObserver to listen for changes
+  onMutation([{addedNodes: [document.documentElement]}]);
+  mo.disconnect(); // disconnects MO to avoid blocking in other webpages
+  chrome.storage.sync.get(["favoriteAnimal"], function(result) {
+    var showDog = result.favoriteAnimal === "dog";
+    createPost(showDog);
+  });
+  sendResponse({status: 200});
+  return true;
 });
 
 /*
@@ -44,8 +44,24 @@ function onMutation(mutations) {
   if (toRemove.length) {
     mo.disconnect(); // stop observing for changes
     for (const el of toRemove) {
+      var deleteIt = true;
       try {
-        el.remove();
+        // for (const child of el.children) {
+        //   // console.log(child);
+        //   var postAuthors = el.getElementsByTagName("A");
+        //   for(const authors of postAuthors) {
+        //     console.log(authors.href);
+        //     const check = "in/james";
+        //     if(authors.href.match(check)) {
+        //       deleteIt = false;
+        //     }
+        //   }
+        //   // console.log(postAuthors.href);
+        // }
+        if(deleteIt) {
+          el.remove();
+        }
+        // el.remove();
       } catch (e) {
         console.log(e);
       }
