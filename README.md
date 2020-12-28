@@ -1,3 +1,5 @@
+<div style="text-align:center;"><img align="center" src="https://i.imgur.com/7rHvy0H.png"/></div>
+
 # LinkedOut - Block your toxic LinkedIn feed.
 ## What is LinkedOut?
 A chrome extension that will remove your LinkedIn feed's posts (and replace it with cat pictures instead).
