@@ -17,9 +17,9 @@
   },
   "options_page": "options.html",
   "icons": {
-    "16": "LinkedOut16.png",
-    "48": "LinkedOut48.png",
-    "128": "LinkedOut128.png"
+    "16": "images/LinkedOut16.png",
+    "48": "images/LinkedOut48.png",
+    "128": "images/LinkedOut128.png"
   },
   "permissions": [
     "tabs",
