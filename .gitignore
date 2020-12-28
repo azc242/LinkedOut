@@ -2,9 +2,13 @@
 header.js
 test.js
 reload.js
+oldBlock.js
+blockPost.js
 
 # for formatting code injected into DOM
 format.html
 image.html
 
 notes.txt
+
+/archive
