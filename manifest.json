@@ -1,24 +1,27 @@
 {
   "name": "LinkedOut",
   "version": "1.0",
+  "description": "Removes LinkedIn posts on your feed and replaces it with cute fluffy animals.",
   "manifest_version": 2,
   "content_scripts": [
 		{
     "matches": ["https://www.linkedin.com/*"],
     "run_at": "document_start",
+    "all_frames": true,
     "js": ["block.js"]
-	  }
+  }
 	],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
   },
+  "options_page": "options.html",
   "icons": {
     "128": "images/linkedin128.png"
   },
   "permissions": [
-    "activeTab",
     "tabs",
-    "background"
+    "background",
+    "storage"
   ]
 }
