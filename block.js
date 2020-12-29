@@ -9,9 +9,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   observe(); // start MutationObserver to listen for changes
   onMutation([{addedNodes: [document.documentElement]}]);
   mo.disconnect(); // disconnects MO to avoid blocking in other webpages
-  chrome.storage.sync.get(["favoriteAnimal"], function(result) {
+  chrome.storage.sync.get(["favoriteAnimal", "whitelist"], function(result) {
     var showDog = result.favoriteAnimal === "dog";
     createPost(showDog);
+    console.log(result.whitelist);
   });
   sendResponse({status: 200});
   return true;
@@ -66,7 +67,7 @@ function observe() {
   });
 }
 
-function createPost(showDog) {
+function createPost(showDog, whitelist) {
   const Http = new XMLHttpRequest(); // makes GET requests to API
   const url = showDog ? 'https://api.thedogapi.com/v1/images/search' : 'https://api.thecatapi.com/v1/images/search';
   Http.open("GET", url);
@@ -75,6 +76,9 @@ function createPost(showDog) {
 
   Http.onreadystatechange = function(){
     insertImage();
+    whitelist.map(function(url) {
+      return '';
+    });
   };
 
   /*
@@ -92,11 +96,15 @@ function createPost(showDog) {
       const img = '<img  width="600" src="' + Http.response[0].url + '" loading="lazy" height="400" id="ember182" class="ivm-view-attr__img--centered feed-shared-image__image feed-shared-image__image--constrained lazy-image ember-view"';
       var imgEmbed = header1 + imageHeader + img + imageHeader2 + header2;
 
-      var coreRailHtml = document.getElementsByClassName("core-rail");
-      coreRailHtml[0].innerHTML += imgEmbed;
-      // console.log(coreRailHtml[0].innerHTML);
+      addToFeed(imgEmbed);
     } catch (e) {
       console.log(e);
     }
+  }
+
+  function addToFeed(htmlElement) {
+    var coreRailHtml = document.getElementsByClassName("core-rail");
+    coreRailHtml[0].innerHTML += htmlElement;
+    console.log("added element");
   }
 }
