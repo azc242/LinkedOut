@@ -1,0 +1,13 @@
+#popup {
+  padding-top: 2rem;
+}
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  width: 200px;
+}
+
+html {
+  width: 200px;
+}
