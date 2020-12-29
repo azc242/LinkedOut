@@ -1,15 +1,14 @@
 // Saves options to chrome.storage
 function save_options() {
   console.log("pressed");
-  var animal = document.getElementById('animal').value;
+  var animal = $('#animal').val();
   chrome.storage.sync.set({
     favoriteAnimal: animal
   }, function() {
     // Update status to let user know options were saved.
-    var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
+    var status = $('#status').text('Options saved.');
     setTimeout(function() {
-      status.textContent = '';
+      status.text('');
     }, 750);
   });
 }
@@ -21,8 +20,8 @@ function restore_options() {
   chrome.storage.sync.get({
     favoriteAnimal: 'cat'
   }, function(items) {
-    document.getElementById('animal').value = items.favoriteAnimal;
+    $('#animal').val(items.favoriteAnimal);
   });
 }
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
+$().ready(restore_options);
+$('#save').on('click', save_options);
