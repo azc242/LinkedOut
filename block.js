@@ -64,7 +64,7 @@ function onMutation(mutations, whitelist) {
       try {
         // if(deleteIt) {
         var individualPosts = el.childNodes;
-        console.log(individualPosts);
+        // console.log(individualPosts);
         for (const child of individualPosts) {
           const re = new RegExp(whitelist.join("|"), "i");
           var containsMatch = re.test(child.innerHTML);
@@ -73,13 +73,11 @@ function onMutation(mutations, whitelist) {
 
           var removeEntireElement = true;
           if(!containsMatch) {
-            // console.log("removing");
-
             var childChild = child.childNodes;
             for (const innerChild of childChild) {
               var innerMatch = re.test(child.innerHTML);
               if(!innerMatch) {
-                console.log("removing");
+                // console.log("removing");
                 innerChild.remove();
               } else {
                 removeEntireElement = false;
