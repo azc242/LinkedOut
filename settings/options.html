@@ -16,14 +16,25 @@
 
   <div id="pushdown" class="container">
     <div class="container">
-      <h3>Preferred Animal</h3>
 
+      <h3>Preferred Animal</h3>
       <select id="animal">
         <option value="cat">cat</option>
         <option value="dog">dog</option>
       </select>
       <div id="status"></div>
       <button id="save">Save</button>
+      <br><br>
+
+      <h3>Whitelisted Accounts</h3>
+      <p>
+        Paste the link of the user or company's account(s) <strong>followed by a new line.</strong><br>
+        Formats should be: <br>
+        https://www.linkedin.com/in/{user_id}/ <br> https://www.linkedin.com/company/{company_id}/
+      </p>
+      <textarea id="whitelist" rows="90" cols="80"></textarea>
+      <div id="status_whitelist"></div>
+      <button id="save_whitelist">Save</button>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -46,28 +46,13 @@ function onMutation(mutations) {
     for (const el of toRemove) {
       var deleteIt = true;
       try {
-        // for (const child of el.children) {
-        //   // console.log(child);
-        //   var postAuthors = el.getElementsByTagName("A");
-        //   for(const authors of postAuthors) {
-        //     console.log(authors.href);
-        //     const check = "in/james";
-        //     if(authors.href.match(check)) {
-        //       deleteIt = false;
-        //     }
-        //   }
-        //   // console.log(postAuthors.href);
-        // }
         if(deleteIt) {
           el.remove();
         }
-        // el.remove();
       } catch (e) {
         console.log(e);
       }
     }
-    console.log("done removing HTML");
-    // observe(); // disabled to prevent continuous observing
   }
 }
 
@@ -88,7 +73,6 @@ function createPost(showDog) {
   Http.responseType = "json";
   Http.send();
 
-  // window.onload = function() {
   Http.onreadystatechange = function(){
     insertImage();
   };
