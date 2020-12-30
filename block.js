@@ -53,6 +53,11 @@ function onMutation(mutations, whitelist) {
       }
     }
   }
+  // this is temporarily needed because when there is a post that doesn't need
+  // to be deleted, LinkedIn sneaks in a post right after it that does not belong
+  var needsCleaning = false;
+
+
   if (toRemove.length) {
     mo.disconnect(); // stop observing for changes
     for (const el of toRemove) {
@@ -68,11 +73,13 @@ function onMutation(mutations, whitelist) {
         for (const child of individualPosts) {
           const re = new RegExp(whitelist.join("|"), "i");
           var containsMatch = re.test(child.innerHTML);
-          console.log(child);
-          console.log(containsMatch);
-
-          var removeEntireElement = true;
+          // console.log(child);
+          // if(containsMatch) {
+          //   console.log(child.innerHTML.match(re));
+          // }
+          // console.log(containsMatch);
           if(!containsMatch) {
+            var removeEntireElement = true;
             var childChild = child.childNodes;
             for (const innerChild of childChild) {
               var innerMatch = re.test(child.innerHTML);
@@ -81,10 +88,12 @@ function onMutation(mutations, whitelist) {
                 innerChild.remove();
               } else {
                 removeEntireElement = false;
+                // needsCleaning = true;
               }
             }
             if(removeEntireElement) {
               child.remove();
+              needsCleaning = true;
             }
             // child.remove();
           } else {
@@ -100,6 +109,23 @@ function onMutation(mutations, whitelist) {
         console.log(e);
       }
     }
+  }
+  if(needsCleaning) {
+    cleanDOM();
+  }
+}
+
+function cleanDOM() {
+  var coreRail = document.getElementsByClassName("core-rail");
+  // var needsInspection = coreRail.childNodes[1]; // 0 should be the animal
+  try {
+    console.log(coreRail);
+    console.log(coreRail[0].children);
+    console.log((coreRail[0].children).item(1)); // should get second post, not the animals
+    console.log((coreRail[0].children).item(1).children);
+    console.log(((coreRail[0].children).item(1)).children.item(1)); // should get the advertisement  
+  } catch (err) {
+    console.log(err);
   }
 }
 
