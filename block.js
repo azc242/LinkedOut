@@ -7,18 +7,16 @@ const mo = new MutationObserver(onMutation);
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   // listen for messages sent from background.js
   observe(); // start MutationObserver to listen for changes
-  // onMutation([{addedNodes: [document.documentElement]}]);
-  // mo.disconnect(); // disconnects MO to avoid blocking in other webpages
+
   chrome.storage.sync.get(["favoriteAnimal", "whitelist"], function(result) {
     var links = result.whitelist;
-    // modify links
+    // modify links to only obtain ID
     links = links.filter(Boolean); // get rid of empty strings
     links.forEach(function(account, i, links) {
       links[i] = account.substring(0, account.length-1);
       links[i] = links[i].substring(links[i].lastIndexOf("/") + 1, links[i].length);
     });
 
-    console.log(links);
     onMutation([{addedNodes: [document.documentElement]}], links);
     mo.disconnect(); // disconnects MO to avoid blocking in other webpages
     var showDog = result.favoriteAnimal === "dog";
@@ -66,35 +64,28 @@ function onMutation(mutations, whitelist) {
       }
       var deleteIt = true;
       try {
-        // if(deleteIt) {
         var individualPosts = el.childNodes;
-        // console.log(individualPosts);
         for (const child of individualPosts) {
           const re = new RegExp(whitelist.join("|"), "i");
           var containsMatch = re.test(child.innerHTML);
-          // console.log(child);
           if(containsMatch) {
             console.log(child.innerHTML.match(re));
           }
-          // console.log(containsMatch);
           if(!containsMatch) {
             var removeEntireElement = true;
             var childChild = child.childNodes;
             for (const innerChild of childChild) {
               var innerMatch = re.test(child.innerHTML);
               if(!innerMatch) {
-                // console.log("removing");
                 innerChild.remove();
               } else {
                 removeEntireElement = false;
-                // needsCleaning = true;
               }
             }
             if(removeEntireElement) {
               child.remove();
               needsCleaning = true;
             }
-            // child.remove();
           } else {
             deleteIt = false;
           }
@@ -108,7 +99,7 @@ function onMutation(mutations, whitelist) {
     }
   }
   if(needsCleaning) {
-expandPosts();
+    expandPosts();
     cleanDOM();
   }
 }
@@ -119,8 +110,10 @@ function cleanDOM() {
   try {
     var crChildren = coreRail[0].children;
 
+    // loops through children of coreRail in case therea re multiple unblocked posts
+    // Note: it starts at 0 because the animal image hasn't been added yet, so
+    // we don't need to handle that
     for(var i = 0; i < crChildren.length; i++) {
-      console.log(crChildren.item(i));
       // for loop starts at 1 because its the 2nd item+ that needs ot be removed
       for(var j = 1; j < crChildren.item(i).children.length; j++) {
         var toRemove = crChildren.item(i).children.item(j);
@@ -145,9 +138,7 @@ function expandPosts() {
   }
 }
 
-/*
-  Starts MutationObserver so that it listens for changes to the DOM
-*/
+// Starts MutationObserver so that it listens for changes to the DOM
 function observe() {
   mo.observe(document, {
     subtree: true,
@@ -164,31 +155,6 @@ function createPost(showDog, whitelist) {
 
   Http.onreadystatechange = function() {
     insertImage();
-
-    whitelist.map(function(url) {
-      if(url.match("company")) {
-        url += "posts/";
-      } else {
-        url += "detail/recent-activity/shares/";
-      }
-      // console.log(url);
-      fetch(url)
-        .then(response => response.text())
-        .then(text => {
-          const parser = new DOMParser();
-          const htmlDocument = parser.parseFromString(text, "text/html");
-
-          // console.log(htmlDocument.documentElement);
-          var posts = htmlDocument.documentElement.getElementsByClassName('feed-container-theme');
-          var posts1 = htmlDocument.getElementsByClassName('feed-container-theme');
-          // console.log(posts1);
-          // addToFeed(posts.innerHTML);
-
-          // const section = htmlDocument.documentElement.querySelector("section");
-          // document.querySelector("div").appendChild(section);
-        });
-    });
-
   };
 
   /*
