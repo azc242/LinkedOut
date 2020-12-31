@@ -57,7 +57,6 @@ function onMutation(mutations, whitelist) {
   // to be deleted, LinkedIn sneaks in a post right after it that does not belong
   var needsCleaning = false;
 
-
   if (toRemove.length) {
     mo.disconnect(); // stop observing for changes
     for (const el of toRemove) {
@@ -74,9 +73,9 @@ function onMutation(mutations, whitelist) {
           const re = new RegExp(whitelist.join("|"), "i");
           var containsMatch = re.test(child.innerHTML);
           // console.log(child);
-          // if(containsMatch) {
-          //   console.log(child.innerHTML.match(re));
-          // }
+          if(containsMatch) {
+            console.log(child.innerHTML.match(re));
+          }
           // console.log(containsMatch);
           if(!containsMatch) {
             var removeEntireElement = true;
@@ -103,14 +102,13 @@ function onMutation(mutations, whitelist) {
         if(deleteIt) {
           el.remove();
         }
-        // el.remove();
-        // }
       } catch (e) {
         console.log(e);
       }
     }
   }
   if(needsCleaning) {
+expandPosts();
     cleanDOM();
   }
 }
@@ -119,13 +117,31 @@ function cleanDOM() {
   var coreRail = document.getElementsByClassName("core-rail");
   // var needsInspection = coreRail.childNodes[1]; // 0 should be the animal
   try {
-    console.log(coreRail);
-    console.log(coreRail[0].children);
-    console.log((coreRail[0].children).item(1)); // should get second post, not the animals
-    console.log((coreRail[0].children).item(1).children);
-    console.log(((coreRail[0].children).item(1)).children.item(1)); // should get the advertisement  
+    var crChildren = coreRail[0].children;
+
+    for(var i = 0; i < crChildren.length; i++) {
+      console.log(crChildren.item(i));
+      // for loop starts at 1 because its the 2nd item+ that needs ot be removed
+      for(var j = 1; j < crChildren.item(i).children.length; j++) {
+        var toRemove = crChildren.item(i).children.item(j);
+        console.log(toRemove);
+        toRemove.remove();
+      }
+    }
   } catch (err) {
     console.log(err);
+  }
+}
+
+function expandPosts() {
+  var coreRail = document.getElementsByClassName("core-rail")[0];
+  var crbuttons = coreRail.getElementsByTagName('button');
+  console.log(crbuttons);
+  for(const btn of crbuttons) {
+    if(btn.innerHTML.match("see more")) {
+      btn.parentNode.setAttribute("style", 'max-height: none; display: block;');
+      btn.remove();
+    }
   }
 }
 

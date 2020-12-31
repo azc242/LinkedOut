@@ -26,7 +26,6 @@
   },
   "permissions": [
     "tabs",
-    "background",
     "storage"
   ],
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js; object-src 'self'"
