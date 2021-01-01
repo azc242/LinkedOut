@@ -13,7 +13,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         links[i] = links[i].substring(links[i].lastIndexOf("/") + 1, links[i].length);
       });
     } else {
-      links = [];
+      sendResponse({status: 200});
+      return true;
     }
     setTimeout(function(){
       removeOccludableUpdate(links);

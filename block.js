@@ -37,6 +37,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   with matches to DEL_SELECTOR
 */
 function onMutation(mutations, whitelist) {
+  const emptyWhitelist = whitelist.length === 0;
   const toRemove = [];
   // loops through entire HTML document's nodes
   for (const { addedNodes } of mutations) {
@@ -73,7 +74,8 @@ function onMutation(mutations, whitelist) {
         for (const child of individualPosts) {
           const re = new RegExp(whitelist.join("|"), "i");
           var containsMatch = re.test(child.innerHTML);
-          if(containsMatch) {
+          // regex will match everything when whitelist is empty/undefined
+          if(!emptyWhitelist && containsMatch) {
             console.log(child.innerHTML.match(re));
             deleteIt = false;
           }
