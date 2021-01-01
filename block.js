@@ -21,8 +21,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     mo.disconnect(); // disconnects MO to avoid blocking in other webpages
     var showDog = result.favoriteAnimal === "dog";
     createPost(showDog, result.whitelist);
-    // console.log(result.whitelist);
   });
+  // removeOccludableUpdate();
   sendResponse({status: 200});
   return true;
 });
@@ -70,8 +70,9 @@ function onMutation(mutations, whitelist) {
           var containsMatch = re.test(child.innerHTML);
           if(containsMatch) {
             console.log(child.innerHTML.match(re));
+            deleteIt = false;
           }
-          if(!containsMatch) {
+          else if(!containsMatch) {
             var removeEntireElement = true;
             var childChild = child.childNodes;
             for (const innerChild of childChild) {
@@ -86,8 +87,6 @@ function onMutation(mutations, whitelist) {
               child.remove();
               needsCleaning = true;
             }
-          } else {
-            deleteIt = false;
           }
         }
         if(deleteIt) {
@@ -100,7 +99,7 @@ function onMutation(mutations, whitelist) {
   }
   if(needsCleaning) {
     expandPosts();
-    cleanDOM();
+    // cleanDOM();
   }
 }
 
@@ -109,21 +108,41 @@ function cleanDOM() {
   // var needsInspection = coreRail.childNodes[1]; // 0 should be the animal
   try {
     var crChildren = coreRail[0].children;
-
     // loops through children of coreRail in case therea re multiple unblocked posts
-    // Note: it starts at 0 because the animal image hasn't been added yet, so
-    // we don't need to handle that
-    for(var i = 0; i < crChildren.length; i++) {
+    // Note: it starts at 0 because the animal image hasn't been added yet
+    for(var i = 1; i < crChildren.length; i++) {
+      console.log(crChildren.item(i));
       // for loop starts at 1 because its the 2nd item+ that needs ot be removed
       for(var j = 1; j < crChildren.item(i).children.length; j++) {
-        var toRemove = crChildren.item(i).children.item(j);
+        toRemove = crChildren.item(i).children.item(j);
         console.log(toRemove);
-        toRemove.remove();
+        // calling remove() will NOT work here, need to do this trick
+        toRemove.parentNode.removeChild(toRemove);
       }
     }
   } catch (err) {
     console.log(err);
   }
+  removeOccludableUpdate();
+}
+
+// last resort DOM Cleaning
+function removeOccludableUpdate() {
+  console.log("cleaning occludable update");
+
+  var occludable = document.getElementsByClassName("occludable-update")[0];
+  console.log(occludable);
+  occludable.parentNode.removeChild(occludable);
+  try {
+    occludable = document.getElementsByClassName("occludable-update")[0];
+    console.log(occludable);
+  }catch (err) {
+    //do onthing
+  }
+  occludable.parentNode.removeChild(occludable);
+  // for(const removable in occludable) {
+  //   removable.parentNode.removeChild(removable);
+  // }
 }
 
 function expandPosts() {
@@ -144,6 +163,12 @@ function observe() {
     subtree: true,
     childList: true,
   });
+}
+
+function addToFeed(htmlElement) {
+  var coreRailHtml = document.getElementsByClassName("core-rail");
+  coreRailHtml[0].innerHTML = htmlElement + coreRailHtml[0].innerHTML;
+  console.log("added element");
 }
 
 function createPost(showDog, whitelist) {
@@ -173,14 +198,9 @@ function createPost(showDog, whitelist) {
       var imgEmbed = header1 + imageHeader + img + imageHeader2 + header2;
 
       addToFeed(imgEmbed);
+      cleanDOM();
     } catch (e) {
       console.log(e);
     }
-  }
-
-  function addToFeed(htmlElement) {
-    var coreRailHtml = document.getElementsByClassName("core-rail");
-    coreRailHtml[0].innerHTML = htmlElement + coreRailHtml[0].innerHTML;
-    console.log("added element");
   }
 }
