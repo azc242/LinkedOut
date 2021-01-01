@@ -3,18 +3,45 @@
   width: 38%;
 }
 
-body {
-  margin: 0;
-  font-family: Helvetica, sans-serif;
-  background-color: #f4f4f4;
-}
-
 a {
   color: #000;
 }
 
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #ffffff;
+}
+
+h3 {
+  color: #2867B2;
+  font-weight: 500;
+}
+
+img {
+  height: 38px;
+  width: 38px;
+  /* margin-bottom: -7px; */
+  margin-bottom: -.7rem;
+}
+
 textarea {
   height: 250px;
+  margin-bottom: 1rem;
+}
+
+/* Custom color */
+.button-blue {
+  background-color: #2867B2;
+  border-color: #2867B2;
+}
+.button-blue.button-clear,
+.button-blue.button-outline {
+  background-color: transparent;
+  color: #2867B2;
+}
+.button-blue.button-clear {
+  border-color: transparent;
 }
 
 /* header */

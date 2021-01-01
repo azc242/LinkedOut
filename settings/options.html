@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
   <title>LinkedOut Options</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
@@ -11,7 +12,8 @@
 
 <body>
   <header class="header">
-    <a href="" class="logo">LinkedOut</a>
+    <a href="https://chrome.google.com/webstore/detail/linkedout/fhmicjpcahmejkghojeafikfhlmkchpi" target="_blank"
+    class="logo"><img src="../images/LinkedOut48.png"/> LinkedOut</a>
   </header>
 
   <div id="pushdown" class="container">
@@ -19,11 +21,11 @@
 
       <h3>Preferred Animal</h3>
       <select id="animal">
-        <option value="cat">cat</option>
-        <option value="dog">dog</option>
+        <option value="cat">🐱 Cat</option>
+        <option value="dog">🐶 Dog</option>
       </select>
       <div id="status"></div>
-      <button id="save">Save</button>
+      <button id="save" class="button-blue">Save</button>
       <br><br>
 
       <h3>Whitelisted Accounts</h3>
@@ -34,7 +36,7 @@
       </p>
       <textarea id="whitelist" rows="90" cols="80"></textarea>
       <div id="status_whitelist"></div>
-      <button id="save_whitelist">Save</button>
+      <button id="save_whitelist" class="button-blue">Save</button>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
