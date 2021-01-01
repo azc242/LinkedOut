@@ -1,0 +1,98 @@
+#pushdown{
+  padding-top: 11rem;
+  width: 100%;
+}
+
+a {
+  color: #000;
+}
+
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #ffffff;
+}
+
+h3 {
+  color: #2867B2;
+  font-weight: 500;
+  text-align: center;
+}
+
+h4,h5,h6 {
+  margin-top: -1rem;
+  color: #2867B2;
+  font-weight: 500;
+  text-align: center;
+}
+
+img {
+  height: 38px;
+  width: 38px;
+  /* margin-bottom: -7px; */
+  margin-bottom: -.7rem;
+}
+
+textarea {
+  height: 250px;
+  margin-bottom: 1rem;
+}
+
+/* Custom color */
+.button-blue {
+  background-color: #2867B2;
+  border-color: #2867B2;
+}
+.button-blue.button-clear,
+.button-blue.button-outline {
+  background-color: transparent;
+  color: #2867B2;
+}
+.button-blue.button-clear {
+  border-color: transparent;
+}
+
+.display-info {
+  margin-top: 25%;
+}
+
+/* header */
+
+.header {
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  align-items: center;
+  text-align: center;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: center;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
