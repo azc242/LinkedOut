@@ -1,10 +1,11 @@
 <h1 align="center">
-  <a href=""><img src="https://i.imgur.com/7rHvy0H.png" width="400"></a>
+  <a href="#"><img src="https://i.imgur.com/7rHvy0H.png" width="400"></a>
   <br>
   LinkedOut - Block your toxic LinkedIn feed.
   <br>
 </h1>
-Coming soon to the Google Chrome Extensions Web Store.
+
+<div><a href="https://chrome.google.com/webstore/detail/linkedout/fhmicjpcahmejkghojeafikfhlmkchpi" target="_blank"><img src="https://i.imgur.com/wupL5fG.png"></a></div>
 
 ## What is LinkedOut?
 A chrome extension that will remove your LinkedIn feed's posts (and replace it with cat or dog pictures instead).
@@ -23,6 +24,10 @@ For cat people:
 For dog people:
 ![Super cute dog LinkedIn feed](https://i.imgur.com/GzmJ10v.jpg)
 
+## Usage
+Clicking on the extension icon in the top right of you Chrome browser will allow you to set whether you prefer cats or dogs on your feed as well as whitelist certain accounts. Alternatively, you can right click the feature and clikc "Options" and an entire HTML page will pop up and you can edit your settings from there.
+
+Note: The whitelisting feature should be used sparingly to not defeat the purpose of this extension. It also only displays direct shares, not reposts.
 ## Contributing
 If you would like to contribute or test an up to date version of this extension (that hasn't made it to the Chrome Store yet), follow these steps.
 1. Download this repository as a ZIP file.
