@@ -22,7 +22,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     var showDog = result.favoriteAnimal === "dog";
     createPost(showDog, result.whitelist);
   });
-  // removeOccludableUpdate();
   sendResponse({status: 200});
   return true;
 });
@@ -73,20 +72,7 @@ function onMutation(mutations, whitelist) {
             deleteIt = false;
           }
           else if(!containsMatch) {
-            var removeEntireElement = true;
-            var childChild = child.childNodes;
-            for (const innerChild of childChild) {
-              var innerMatch = re.test(child.innerHTML);
-              if(!innerMatch) {
-                innerChild.remove();
-              } else {
-                removeEntireElement = false;
-              }
-            }
-            if(removeEntireElement) {
-              child.remove();
-              needsCleaning = true;
-            }
+            child.remove();
           }
         }
         if(deleteIt) {
@@ -96,10 +82,6 @@ function onMutation(mutations, whitelist) {
         console.log(e);
       }
     }
-  }
-  if(needsCleaning) {
-    expandPosts();
-    // cleanDOM();
   }
 }
 
@@ -122,38 +104,6 @@ function cleanDOM() {
     }
   } catch (err) {
     console.log(err);
-  }
-  removeOccludableUpdate();
-}
-
-// last resort DOM Cleaning
-function removeOccludableUpdate() {
-  console.log("cleaning occludable update");
-
-  var occludable = document.getElementsByClassName("occludable-update")[0];
-  console.log(occludable);
-  occludable.parentNode.removeChild(occludable);
-  try {
-    occludable = document.getElementsByClassName("occludable-update")[0];
-    console.log(occludable);
-  }catch (err) {
-    //do onthing
-  }
-  occludable.parentNode.removeChild(occludable);
-  // for(const removable in occludable) {
-  //   removable.parentNode.removeChild(removable);
-  // }
-}
-
-function expandPosts() {
-  var coreRail = document.getElementsByClassName("core-rail")[0];
-  var crbuttons = coreRail.getElementsByTagName('button');
-  console.log(crbuttons);
-  for(const btn of crbuttons) {
-    if(btn.innerHTML.match("see more")) {
-      btn.parentNode.setAttribute("style", 'max-height: none; display: block;');
-      btn.remove();
-    }
   }
 }
 
