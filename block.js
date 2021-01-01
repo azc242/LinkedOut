@@ -10,12 +10,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
   chrome.storage.sync.get(["favoriteAnimal", "whitelist"], function(result) {
     var links = result.whitelist;
-    // modify links to only obtain ID
-    links = links.filter(Boolean); // get rid of empty strings
-    links.forEach(function(account, i, links) {
-      links[i] = account.substring(0, account.length-1);
-      links[i] = links[i].substring(links[i].lastIndexOf("/") + 1, links[i].length);
-    });
+
+    // make sure links is not undefined
+    if(links) {
+      // modify links to only obtain ID
+      links = links.filter(Boolean); // get rid of empty strings
+      links.forEach(function(account, i, links) {
+        links[i] = account.substring(0, account.length-1);
+        links[i] = links[i].substring(links[i].lastIndexOf("/") + 1, links[i].length);
+      });
+    } else {
+      links = [];
+    }
 
     onMutation([{addedNodes: [document.documentElement]}], links);
     mo.disconnect(); // disconnects MO to avoid blocking in other webpages
