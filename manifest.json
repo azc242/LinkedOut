@@ -1,7 +1,7 @@
 {
   "name": "LinkedOut",
-  "version": "0.0.1",
-  "description": "Removes LinkedIn posts on your feed and replaces it with cute fluffy animals.",
+  "version": "0.0.2",
+  "description": "Removes LinkedIn posts on your feed and replaces it with cute animals instead.",
   "manifest_version": 2,
   "content_scripts": [
 		{
@@ -28,5 +28,5 @@
     "tabs",
     "storage"
   ],
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js https://www.google-analytics.com; object-src 'self'"
 }

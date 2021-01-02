@@ -16,9 +16,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       sendResponse({status: 200});
       return true;
     }
+    // sort of a brute-force solution to make sure the DOM and deletion async goes before cleaning up
     setTimeout(function(){
       removeOccludableUpdate(links);
-    }, 2500);
+    }, 2000);
   });
   sendResponse({status: 200});
   return true;
