@@ -1,6 +1,10 @@
 #pushdown{
-  padding-top: 6rem;
+  padding-top: 3.8rem;
   width: 100%;
+}
+
+#logo {
+  color: #2867B2;
 }
 
 a {
@@ -19,6 +23,7 @@ footer {
   text-align: center;
   margin-top: 3rem;
   font-size: 1.8rem;
+  margin-bottom: 3.5rem;
 }
 
 h3 {
@@ -43,7 +48,7 @@ img {
 
 .display-info {
   /* margin-top: 15%; */
-  margin-top: 12rem;
+  margin-top: 6rem;
 }
 
 /* header */
