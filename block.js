@@ -65,7 +65,7 @@ function onMutation(mutations, whitelist) {
     mo.disconnect(); // stop observing for changes
     for (const el of toRemove) {
       if(el.innerHTML.match("pb5")) {
-        console.log("matched");
+        // console.log("matched");
         el.remove();
       }
       var deleteIt = true;
@@ -76,7 +76,7 @@ function onMutation(mutations, whitelist) {
           var containsMatch = re.test(child.innerHTML);
           // regex will match everything when whitelist is empty/undefined
           if(!emptyWhitelist && containsMatch) {
-            console.log(child.innerHTML.match(re));
+            // console.log(child.innerHTML.match(re));
             deleteIt = false;
           }
           else if(!containsMatch) {
@@ -101,11 +101,11 @@ function cleanDOM() {
     // loops through children of coreRail in case therea re multiple unblocked posts
     // Note: it starts at 0 because the animal image hasn't been added yet
     for(var i = 1; i < crChildren.length; i++) {
-      console.log(crChildren.item(i));
+      // console.log(crChildren.item(i));
       // for loop starts at 1 because its the 2nd item+ that needs ot be removed
       for(var j = 1; j < crChildren.item(i).children.length; j++) {
         toRemove = crChildren.item(i).children.item(j);
-        console.log(toRemove);
+        // console.log(toRemove);
         // calling remove() will NOT work here, need to do this trick
         toRemove.parentNode.removeChild(toRemove);
       }
@@ -126,7 +126,7 @@ function observe() {
 function addToFeed(htmlElement) {
   var coreRailHtml = document.getElementsByClassName("core-rail");
   coreRailHtml[0].innerHTML = htmlElement + coreRailHtml[0].innerHTML;
-  console.log("added element");
+  // console.log("added element");
 }
 
 function createPost(showDog, whitelist) {

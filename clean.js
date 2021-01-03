@@ -26,21 +26,21 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function removeOccludableUpdate(links) {
-  console.log("cleaning occludable update");
+  // console.log("cleaning occludable update");
   const toRemove = ["occludable-update","has-occluded-height", "occludable-update-hint", "occludable"];
   const re = new RegExp(toRemove.join("|"), "i");
   const re2 = new RegExp(links.join("|"), "i");
 
   var cr = document.getElementsByClassName("core-rail");
-  console.log(cr[0]);
+  // console.log(cr[0]);
   for(const child of cr) {
-    console.log(child);
+    // console.log(child);
     const c = child.children;
     for(const post of c) {
-      console.log(post);
+      // console.log(post);
       const r = post.children;
       for(const del of r) {
-        console.log(del);
+        // console.log(del);
         // check it contains the classes but DOESNT contain whitelisted users' posts
         if(re.test(del.innerHTML) && !re2.test(del.innerHTML)) {
           del.setAttribute("class", "");
@@ -51,7 +51,7 @@ function removeOccludableUpdate(links) {
       }
     }
   }
-  console.log("EXITING REMOVE OCCLUDABLE UPDATES FUNCTION");
+  // console.log("EXITING REMOVE OCCLUDABLE UPDATES FUNCTION");
   expandPosts();
 }
 
@@ -59,7 +59,7 @@ function removeOccludableUpdate(links) {
 function expandPosts() {
   var coreRail = document.getElementsByClassName("core-rail")[0];
   var crbuttons = coreRail.getElementsByTagName('button');
-  console.log(crbuttons);
+  // console.log(crbuttons);
   for(const btn of crbuttons) {
     if(btn.innerHTML.match("see more")) {
       btn.parentNode.setAttribute("style", 'max-height: none; display: block;');
