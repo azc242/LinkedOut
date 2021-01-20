@@ -19,24 +19,24 @@ function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
     favoriteAnimal: '',
-    whitelist: []
+    okList: []
   }, function(items) {
     $('#animal').val(items.favoriteAnimal);
-    $('#whitelist').val(items.whitelist.map(function(url) {
+    $('#okList').val(items.okList.map(function(url) {
       console.log(url);
       return url + "\n";
     }).join('')); // join('') prevents map() from giving unexpected comma
   });
 }
 
-// Saves whitelist to chrome.storage
-function save_whitelist() {
-  var whitelist = $('#whitelist').val().split("\n");
+// Saves okList to chrome.storage
+function save_okList() {
+  var okList = $('#okList').val().split("\n");
   chrome.storage.sync.set({
-    whitelist: whitelist
+    okList: okList
   }, function() {
     // Update status to let user know options were saved.
-    var status = $('#status_whitelist').text('Options saved.');
+    var status = $('#status_okList').text('Options saved.');
     setTimeout(function() {
       status.text('');
     }, 750);
@@ -44,4 +44,4 @@ function save_whitelist() {
 }
 $().ready(restore_options);
 $('#save').on('click', save_options_animal);
-$("#save_whitelist").on('click', save_whitelist);
+$("#save_okList").on('click', save_okList);

@@ -1,6 +1,6 @@
 {
   "name": "LinkedOut",
-  "version": "0.0.2",
+  "version": "0.0.2.1",
   "description": "Removes LinkedIn posts on your feed and replaces it with cute animals instead.",
   "manifest_version": 2,
   "content_scripts": [
