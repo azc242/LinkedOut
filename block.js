@@ -1,7 +1,7 @@
 // jshint esversion:8
 
 // init classname matching string and MutationObserver
-const DEL_SELECTOR = ".core-rail";
+const DEL_SELECTOR = ".scaffold-layout__main";
 const mo = new MutationObserver(onMutation);
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -92,7 +92,7 @@ function onMutation(mutations, okList) {
 }
 
 function cleanDOM() {
-  var coreRail = document.getElementsByClassName("core-rail");
+  var coreRail = document.getElementsByClassName("scaffold-layout__main");
   try {
     var crChildren = coreRail[0].children;
     // loops through children of coreRail in case therea re multiple unblocked posts
@@ -118,7 +118,7 @@ function observe() {
 }
 
 function addToFeed(htmlElement) {
-  var coreRailHtml = document.getElementsByClassName("core-rail");
+  var coreRailHtml = document.getElementsByClassName("scaffold-layout__main");
   coreRailHtml[0].innerHTML = htmlElement + coreRailHtml[0].innerHTML;
 }
 

@@ -30,7 +30,7 @@ function removeOccludableUpdate(links) {
   const re = new RegExp(toRemove.join("|"), "i");
   const re2 = new RegExp(links.join("|"), "i");
 
-  var cr = document.getElementsByClassName("core-rail");
+  var cr = document.getElementsByClassName("scaffold-layout__main");
   for(const child of cr) {
     const c = child.children;
     for(const post of c) {
@@ -49,13 +49,27 @@ function removeOccludableUpdate(links) {
 
 
 function expandPosts() {
-  var coreRail = document.getElementsByClassName("core-rail")[0];
-  var crbuttons = coreRail.getElementsByTagName('button');
-  // console.log(crbuttons);
-  for(const btn of crbuttons) {
-    if(btn.innerHTML.match("see more")) {
-      btn.parentNode.setAttribute("style", 'max-height: none; display: block;');
-      btn.remove();
+  try {
+    var coreRail = document.getElementsByClassName("scaffold-layout__main")[0];
+    var crbuttons = coreRail.getElementsByTagName('button');
+    // console.log(crbuttons);
+    for(const btn of crbuttons) {
+      if(btn.innerHTML.match("see more")) {
+        btn.parentNode.setAttribute("style", 'max-height: none; display: block;');
+        btn.remove();
+      }
     }
   }
+  catch (e) {
+    // move on
+  }
+  // var coreRail = document.getElementsByClassName("core-rail")[0];
+  // var crbuttons = coreRail.getElementsByTagName('button');
+  // // console.log(crbuttons);
+  // for(const btn of crbuttons) {
+  //   if(btn.innerHTML.match("see more")) {
+  //     btn.parentNode.setAttribute("style", 'max-height: none; display: block;');
+  //     btn.remove();
+  //   }
+  // }
 }
