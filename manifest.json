@@ -1,18 +1,23 @@
 {
   "name": "LinkedOut",
-  "version": "0.0.2.8.1",
+  "version": "0.0.2.91",
   "description": "Removes LinkedIn posts on your feed and replaces it with cute animals instead.",
   "manifest_version": 2,
   "content_scripts": [
-		{
-    "matches": ["https://www.linkedin.com/*"],
-    "run_at": "document_start",
-    "all_frames": true,
-    "js": ["block.js", "clean.js"]
-  }
-	],
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "block.js",
+        "clean.js"
+      ]
+    }
+  ],
   "background": {
-    "scripts": ["background.js"],
+    "page": "background.html",
     "persistent": false
   },
   "browser_action": {
@@ -28,5 +33,5 @@
     "tabs",
     "storage"
   ],
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js https://www.google-analytics.com https://www.googletagmanager.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com;"
 }
